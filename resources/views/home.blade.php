@@ -118,13 +118,39 @@
    </body>
    <script>
     $(document).ready(function(){
+        var stringConstructor = "test".constructor;
+        var arrayConstructor = [].constructor;
+        var objectConstructor = {}.constructor;
+        function whatIsIt(object) {
+            if (object === null) {
+                return "null";
+            }
+            else if (object === undefined) {
+                return "undefined";
+            }
+            else if (object.constructor === stringConstructor) {
+                return "String";
+            }
+            else if (object.constructor === arrayConstructor) {
+                return "Array";
+            }
+            else if (object.constructor === objectConstructor) {
+                return "Object";
+            }
+            else {
+                return "don't know";
+            }
+        }
         $('[name=subscription_type]').on('change', function(){
             $('#user_details').addClass("hide");
             if($(this).val() != ""){
                 $.ajax({
-                   url: "{{env('API_URL')}}/admin/users/"+$(this).val(),
+                   url: "{{ url('request') }}",
                    type: "get",
+                   data: "url=/admin/users/"+$(this).val(),
                    success: function(response){
+                       if(whatIsIt(response) == "String")
+                           response = JSON.parse(response);
                        var html='<option value="">Not Selected</option>'
                        if(response.status){
                             $.each(response.data, function(i, item) {
@@ -144,10 +170,12 @@
                 $('#email').html($(this).find(':selected').attr('data-email'));
                 $('#profile_pic').attr("src", "{{env('IMAGE_URL')}}/"+$(this).find(':selected').attr('data-image'));
                 $.ajax({
-                   url: "{{env('API_URL')}}/admin/user/first-date/"+$(this).val(),
+                   url: "{{ url('request') }}",
                    type: "get",
+                   data: "url=/admin/user/first-date/"+$(this).val(),
                    success: function(response){
-                       console.log(response)
+                       if(whatIsIt(response) == "String")
+                           response = JSON.parse(response);
                        if(response.status){
                             $( "[name=date]" ).datepicker({
                                 dateFormat:'yy-mm-dd',
@@ -176,10 +204,12 @@
             if($('[name=subscription_type]').val() == "" || $('[name=users]').val() == "" || $('[name=date]').val() == "")
                 return;
             $.ajax({
-               url: "{{env('API_URL')}}/admin/image/"+$('[name=users]').val()+"/"+$('[name=date]').val(),
+               url: "{{ url('request') }}",
                type: "get",
+               data: "url=/admin/image/"+$('[name=users]').val()+"/"+$('[name=date]').val(),
                success: function(response){
-                   console.log(response)
+                   if(whatIsIt(response) == "String")
+                       response = JSON.parse(response);
                    if(response.status){
                        var html = "";
                         $.each(response.data, function(i, item) {
