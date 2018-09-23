@@ -32,7 +32,17 @@
             <div class="col-lg-12 text-center">
                <div class="search-box">
                   <span class="attach-label-box">Filtering Options</span>
-                  <span class="logout">Logout</span>
+                  <span class="logout">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                  </span>
                   <form method="post" id="form">
                      <div class="col-xs-2 padding-zero">
                         <div class="checkbox">
@@ -52,7 +62,7 @@
                            <input hidden="" name="highest_level" value="1">
                         </div>
                         <div class="checkbox">
-                           <input class="form-control" name="date">
+                           <input class="form-control" name="date" readonly>
                         </div>
                      </div>
                      <div class="col-xs-2 padding-zero">
@@ -215,7 +225,7 @@
                         $.each(response.data, function(i, item) {
                             if(item != ""){
                                 html += '<div class="col-lg-3 col-md-4 col-xs-6">'
-                                html += '<a href="'+item.iamge+'" target="_blank" class="d-block mb-4 h-100">'
+                                html += '<a href="'+item.image+'" target="_blank" class="d-block mb-4 h-100">'
                                 html += '<img class="img-fluid img-thumbnail" src="{{env('IMAGE_URL')}}/'+item.thumb_320+'" alt=""></a></div>';
                             }
                             else{
