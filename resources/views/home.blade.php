@@ -82,7 +82,7 @@
                <table class="table hide" id="user_details">
                   <tbody>
                      <tr>
-                        <td class="col-xs-4"><img id="profile_pic" src="img/blank-profile.png" style="width: 200px;" /></td>
+                        <td class="col-xs-4"><img id="profile_pic" src="img/blank-profile.png" style="height: 200px; width:200px;" /></td>
                         <td class="col-xs-4">
                            <table class="table">
                               <tbody>
