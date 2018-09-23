@@ -225,7 +225,7 @@
                         $.each(response.data, function(i, item) {
                             if(item != ""){
                                 html += '<div class="col-lg-3 col-md-4 col-xs-6">'
-                                html += '<a href="'+item.image+'" target="_blank" class="d-block mb-4 h-100">'
+                                html += '<a href="{{env('IMAGE_URL')}}/'+item.image+'" target="_blank" class="d-block mb-4 h-100">'
                                 html += '<img class="img-fluid img-thumbnail" src="{{env('IMAGE_URL')}}/'+item.thumb_320+'" alt=""></a></div>';
                             }
                             else{
