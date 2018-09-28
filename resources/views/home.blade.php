@@ -58,6 +58,7 @@
                               <option value="">Not Selected</option>
                               <option value="weekly">Weekly</option>
                               <option value="monthly">Monthly</option>
+                              <option value="not">Not Subscribed</option>
                            </select>
                            <input hidden="" name="highest_level" value="1">
                         </div>
